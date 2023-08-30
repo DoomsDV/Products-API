@@ -27,3 +27,15 @@ class Category(TimeLine):
     
     def __str__(self):
         return self.name
+
+class Brands(TimeLine):
+    name = models.CharField(max_length=50)
+
+    class Meta:
+        verbose_name = 'marca'
+        verbose_name_plural = 'marcas'
+    
+    def __str__(self):
+        return self.name
+
+

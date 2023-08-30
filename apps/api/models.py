@@ -7,3 +7,12 @@ class TimeLine(models.Model):
     class Meta:
         abstract = True
 
+class Sub_category(TimeLine):
+    name = models.CharField(max_length=50)
+
+    class Meta:
+        verbose_name = 'sub categorias'
+        verbose_name_plural = 'sub categorías'
+
+    def __str__(self):
+        return self.name

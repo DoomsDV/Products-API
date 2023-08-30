@@ -44,6 +44,8 @@ class Product(TimeLine):
     name = models.CharField(max_length=200)
     code = models.CharField(max_length=6, blank=True, null=True, unique=True)
     description = models.TextField(blank=True, null=True)
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
+    sub_category = models.ForeignKey(Sub_category, on_delete=models.SET_NULL, null=True)
     brand = models.ForeignKey(Brand, on_delete=models.SET_NULL, null=True)
     price = models.PositiveBigIntegerField(default=0)
     url_image = models.URLField()

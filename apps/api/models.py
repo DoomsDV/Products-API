@@ -28,7 +28,7 @@ class Category(TimeLine):
     def __str__(self):
         return self.name
 
-class Brands(TimeLine):
+class Brand(TimeLine):
     name = models.CharField(max_length=50)
 
     class Meta:
@@ -37,5 +37,4 @@ class Brands(TimeLine):
     
     def __str__(self):
         return self.name
-
 

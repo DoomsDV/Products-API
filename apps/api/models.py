@@ -16,3 +16,14 @@ class Sub_category(TimeLine):
 
     def __str__(self):
         return self.name
+
+class Category(TimeLine):
+    name = models.CharField(max_length=50)
+    sub_categories = models.ManyToManyField(Sub_category, blank=True)
+    
+    class Meta:
+        verbose_name = 'categoría'
+        verbose_name_plural = 'categorías'
+    
+    def __str__(self):
+        return self.name

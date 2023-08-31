@@ -41,7 +41,7 @@ def get_product_api_view(req, id):
                 return Response(product_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         elif req.method == 'DELETE':
             product.delete()
-            return Response({'msg': 'The product was successfully removed'}, status=status.HTTP_200_OK)
+            return Response({'msg': 'The product was successfully removed'}, status=status.HTTP_204_NO_CONTENT)
     else:
         return Response({'msg': 'The product does not exist'}, status=status.HTTP_404_NOT_FOUND)
 
@@ -82,7 +82,7 @@ def get_category_api_view(req, id):
                 return Response(category_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         elif req.method == 'DELETE':
             category.delete()
-            return Response({'msg': 'The category was successfully removed'}, status=status.HTTP_200_OK)
+            return Response({'msg': 'The category was successfully removed'}, status=status.HTTP_204_NO_CONTENT)
     else:
         return Response({'msg': 'The category does not exist'}, status=status.HTTP_404_NOT_FOUND)
 
@@ -125,7 +125,7 @@ def get_sub_category_api_view(req, id):
                 return Response(sub_category_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         elif req.method == 'DELETE':
             sub_category.delete()
-            return Response({'msg': 'The sub category was successfully removed'}, status=status.HTTP_200_OK)
+            return Response({'msg': 'The sub category was successfully removed'}, status=status.HTTP_204_NO_CONTENT)
     else:
         return Response({'msg': 'The sub category does not exist'}, status=status.HTTP_404_NOT_FOUND)
 
@@ -179,6 +179,6 @@ def get_brand_api_view(req, id):
                 return Response(brand_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         elif req.method == 'DELETE':
             brand.delete()
-            return Response({'msg': 'The brand was successfully removed'}, status=status.HTTP_200_OK)
+            return Response({'msg': 'The brand was successfully removed'}, status=status.HTTP_204_NO_CONTENT)
     else:
         return Response({'msg': 'The brand does not exist'}, status=status.HTTP_404_NOT_FOUND)

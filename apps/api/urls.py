@@ -17,6 +17,8 @@ urlpatterns += [
          name='list-sub-categories-url'),
     path('sub-category/<int:id>/', get_sub_category_api_view,
          name='get-sub-category-url'),
+    path('sub-category/filter/category/<int:id>/',
+         filter_sub_category_api_view, name='filter-sub-category-url'),
 ]
 
 urlpatterns += [

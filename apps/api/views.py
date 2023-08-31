@@ -26,7 +26,7 @@ def products_api_view(req):
 
 
 @api_view(['GET', 'PUT', 'DELETE'])
-def product_api_view(req, id):
+def get_product_api_view(req, id):
     product = Product.objects.filter(id=id).first()
     if product:
         if req.method == 'GET':

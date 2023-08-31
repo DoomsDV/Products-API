@@ -11,3 +11,10 @@ urlpatterns += [
     path('categories/', categories_api_view, name='list-categories-url'),
     path('category/<int:id>/', get_category_api_view, name='get-category-url'),
 ]
+
+urlpatterns += [
+    path('sub-categories/', sub_categories_api_view,
+         name='list-sub-categories-url'),
+    path('sub-category/<int:id>/', get_sub_category_api_view,
+         name='get-sub-category-url'),
+]

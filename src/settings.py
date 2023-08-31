@@ -6,13 +6,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 load_dotenv()
 
-SECRET_KEY = os.environ.get('SECRET_KEY') 
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 DEBUG = os.environ.get('DEBUG')
 
 ALLOWED_HOSTS = []
 
 BASE_APPS = [
+    "admin_interface",
+    "colorfield",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -68,7 +70,7 @@ DATABASES = {
         'USER': 'root',
         'HOST': 'localhost',
         'PORT': '',
-        'PASSWORD': os.environ.get('DB_PASSWORD'), 
+        'PASSWORD': os.environ.get('DB_PASSWORD'),
     }
 }
 
@@ -98,3 +100,7 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Django admin interface
+X_FRAME_OPTIONS = "SAMEORIGIN"
+SILENCED_SYSTEM_CHECKS = ["security.W019"]

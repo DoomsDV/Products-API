@@ -4,6 +4,8 @@ from rest_framework.decorators import api_view
 from .models import *
 from .serializers import *
 
+# Products API
+
 
 @api_view(['GET', 'POST'])
 def products_api_view(req):
@@ -42,3 +44,23 @@ def product_api_view(req, id):
             return Response({'msg': 'The product was successfully removed'}, status=status.HTTP_200_OK)
     else:
         return Response({'msg': 'The product does not exist'}, status=status.HTTP_404_NOT_FOUND)
+
+# Categories API
+
+
+@api_view(['GET', 'POST'])
+def categories_api_view(req):
+    if req.method == 'GET':
+        categories = Category.objects.all()
+        if categories.exists():
+            categories_serializers = CategorySerializer(categories, many=True)
+            return Response(categories_serializers.data, status=status.HTTP_200_OK)
+        else:
+            return Response({'msg': 'No categories'}, status=status.HTTP_200_OK)
+    elif req.method == 'POST':
+        categories_serializers = CategorySerializer(data=req.data)
+        if categories_serializers.is_valid():
+            categories_serializers.save()
+            return Response(categories_serializers.data, status=status.HTTP_200_OK)
+        else:
+            return Response(categories_serializers.errors, status=status.HTTP_400_BAD_REQUEST)

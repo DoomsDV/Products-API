@@ -148,3 +148,24 @@ def brands_api_view(req):
             return Response(brands_serializers.data, status=status.HTTP_200_OK)
         else:
             return Response(brands_serializers.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET', 'PUT', 'DELETE'])
+def get_brand_api_view(req, id):
+    brand = Brand.objects.filter(id=id).first()
+    if brand:
+        if req.method == 'GET':
+            brand_serializer = BrandSerializer(brand)
+            return Response(brand_serializer.data, status=status.HTTP_200_OK)
+        elif req.method == 'PUT':
+            brand_serializer = BrandSerializer(brand, data=req.data)
+            if brand_serializer.is_valid():
+                brand_serializer.save()
+                return Response(brand_serializer.data, status=status.HTTP_201_CREATED)
+            else:
+                return Response(brand_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        elif req.method == 'DELETE':
+            brand.delete()
+            return Response({'msg': 'The brand was successfully removed'}, status=status.HTTP_200_OK)
+    else:
+        return Response({'msg': 'The brand does not exist'}, status=status.HTTP_404_NOT_FOUND)

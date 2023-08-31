@@ -64,3 +64,24 @@ def categories_api_view(req):
             return Response(categories_serializers.data, status=status.HTTP_200_OK)
         else:
             return Response(categories_serializers.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET', 'PUT', 'DELETE'])
+def get_category_api_view(req, id):
+    category = Category.objects.filter(id=id).first()
+    if category:
+        if req.method == 'GET':
+            category_serializer = CategorySerializer(category)
+            return Response(category_serializer.data, status=status.HTTP_200_OK)
+        elif req.method == 'PUT':
+            category_serializer = CategorySerializer(category, data=req.data)
+            if category_serializer.is_valid():
+                category_serializer.save()
+                return Response(category_serializer.data, status=status.HTTP_200_OK)
+            else:
+                return Response(category_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        elif req.method == 'DELETE':
+            category.delete()
+            return Response({'msg': 'The category was successfully removed'}, status=status.HTTP_200_OK)
+    else:
+        return Response({'msg': 'The category does not exist'}, status=status.HTTP_404_NOT_FOUND)

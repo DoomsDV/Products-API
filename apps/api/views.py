@@ -129,6 +129,19 @@ def get_sub_category_api_view(req, id):
     else:
         return Response({'msg': 'The sub category does not exist'}, status=status.HTTP_404_NOT_FOUND)
 
+
+@api_view(['GET'])
+def filter_sub_category_api_view(req, id):
+    category = Category.objects.filter(id=id).first()
+    if category:
+        if req.method == 'GET':
+            sub_categories = category.sub_categories.all()
+            sub_categories_serializers = SubCategorySerializer(
+                sub_categories, many=True)
+            return Response(sub_categories_serializers.data, status=status.HTTP_200_OK)
+    else:
+        return Response({'msg': 'The category does not exist'}, status=status.HTTP_404_NOT_FOUND)
+
 # Marcas
 
 

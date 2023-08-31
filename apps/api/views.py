@@ -128,3 +128,23 @@ def get_sub_category_api_view(req, id):
             return Response({'msg': 'The sub category was successfully removed'}, status=status.HTTP_200_OK)
     else:
         return Response({'msg': 'The sub category does not exist'}, status=status.HTTP_404_NOT_FOUND)
+
+# Marcas
+
+
+@api_view(['GET', 'POST'])
+def brands_api_view(req):
+    if req.method == 'GET':
+        brands = Brand.objects.all()
+        if brands.exists():
+            brands_serializers = BrandSerializer(brands, many=True)
+            return Response(brands_serializers.data, status=status.HTTP_200_OK)
+        else:
+            return Response({'msg': {'No brands'}}, status=status.HTTP_200_OK)
+    elif req.method == 'POST':
+        brands_serializers = BrandSerializer(data=req.data)
+        if brands_serializers.is_valid():
+            brands_serializers.save()
+            return Response(brands_serializers.data, status=status.HTTP_200_OK)
+        else:
+            return Response(brands_serializers.errors, status=status.HTTP_400_BAD_REQUEST)

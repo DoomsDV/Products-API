@@ -85,3 +85,24 @@ def get_category_api_view(req, id):
             return Response({'msg': 'The category was successfully removed'}, status=status.HTTP_200_OK)
     else:
         return Response({'msg': 'The category does not exist'}, status=status.HTTP_404_NOT_FOUND)
+
+# Sub categorias
+
+
+@api_view(['GET', 'POST'])
+def sub_categories_api_view(req):
+    if req.method == 'GET':
+        sub_categories = Sub_category.objects.all()
+        if sub_categories.exists():
+            sub_categories_serializers = SubCategorySerializer(
+                sub_categories, many=True)
+            return Response(sub_categories_serializers.data, status=status.HTTP_200_OK)
+        else:
+            return Response({'msg': 'No sub categories'}, status=status.HTTP_200_OK)
+    elif req.method == 'POST':
+        sub_category = SubCategorySerializer(data=req.data)
+        if sub_category.is_valid():
+            sub_category.save()
+            return Response(sub_category.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response(sub_category.errors, status=status.HTTP_400_BAD_REQUEST)

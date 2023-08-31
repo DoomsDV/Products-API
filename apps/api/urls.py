@@ -18,3 +18,8 @@ urlpatterns += [
     path('sub-category/<int:id>/', get_sub_category_api_view,
          name='get-sub-category-url'),
 ]
+
+urlpatterns += [
+    path('brands/', brands_api_view, name='list-brands-url'),
+    path('brand/<int:id>/', get_brand_api_view, name='get-brand-url'),
+]

@@ -3,7 +3,7 @@ import os
 
 ALLOWED_HOSTS = ['*']
 
-DEBUG = os.environ.get('DEBUG')
+DEBUG = os.environ.get('DEBUG') == 'True'
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 DATABASES = {
@@ -14,7 +14,7 @@ DATABASES = {
 }
 
 MIDDLEWARE += [
-    'whitenoise.middleware.WhitenoiseMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 STATIC_URL = '/static/'
